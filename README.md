@@ -78,7 +78,7 @@ Set it up once, and it works invisibly in the background.
 ## 📥 Download
 
 - **Google Play:** [Get it on Google Play](https://play.google.com/store/apps/details?id=de.goork.mapflip)
-- **F-Droid:** Currently in review ([Merge Request !45011](https://gitlab.com/fdroid/fdroiddata/-/merge_requests/45011))
+- **F-Droid:** [Get it on F-Droid](https://f-droid.org/packages/de.goork.mapflip/)
 - **GitHub:** Direct APK download from [Releases](https://github.com/thefraggle/mapflip/releases)
 
 ---
