@@ -1,3 +1,8 @@
+## 1.3.1
+- Aufgeräumte Benutzeroberfläche: Schnellere Ladezeiten und noch flüssigere Bedienung
+- Verbesserte Zuverlässigkeit: Stabilere automatische Erkennung und Weiterleitung von geteilten Karten-Links
+- Detailverbesserungen: Optimierte Erkennung der App-Version und allgemeine Fehlerbehebungen
+
 ## 1.3.0
 - Freie Kartenauswahl: Unterstützung für 12 Navigations-Apps (u. a. Organic Maps, OsmAnd, Waze) sowie System-Auswahldialog
 - Mehr Kartendienste: Liest Apple Maps, Google Maps, OpenStreetMap, Bing, DuckDuckGo, HERE WeGo, Yandex Maps, Geokoordinaten & Plus Codes

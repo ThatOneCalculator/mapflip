@@ -1,3 +1,8 @@
+## 1.3.1
+- Refined Interface: Faster loading and even smoother navigation
+- Enhanced Reliability: More robust automatic detection and redirection of shared map links
+- Detail Improvements: Optimized app version recognition and general bug fixes
+
 ## 1.3.0
 - Choose Your Navigation App: Support for 12 map apps (incl. Organic Maps, OsmAnd, Waze) and system picker
 - Broader Support: Intercepts Apple Maps, Google Maps, OpenStreetMap, Bing, DuckDuckGo, HERE WeGo, Yandex Maps, GPS coordinates & Plus Codes
