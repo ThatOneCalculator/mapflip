@@ -37,8 +37,8 @@ object Analytics {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var isInitialized = false
 
-    private var appVersion = "1.2.12"
-    private var appBuildNumber = "315015"
+    private var appVersion = BuildConfig.VERSION_NAME
+    private var appBuildNumber = BuildConfig.VERSION_CODE.toString()
     private var isDebug = false
     private var osVersion = ""
     private var locale = ""
@@ -61,7 +61,7 @@ object Analytics {
             }
 
             if (pInfo != null) {
-                appVersion = pInfo.versionName ?: "1.2.12"
+                appVersion = pInfo.versionName ?: BuildConfig.VERSION_NAME
                 appBuildNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     pInfo.longVersionCode.toString()
                 } else {
