@@ -132,5 +132,5 @@ In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission
 
 ## 4. Testing & Quality Assurance
 
-* **Unit Test Suite**: Over 120 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
+* **Unit Test Suite**: 125 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
 * **Clean Code & Zero External Dependencies**: The core FOSS build relies solely on AndroidX and standard Kotlin/Compose libraries.
