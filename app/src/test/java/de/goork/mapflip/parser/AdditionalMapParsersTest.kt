@@ -178,4 +178,63 @@ class AdditionalMapParsersTest {
         val umlautHere = UniversalMapParser.parse("https://wego.here.com/search/N%C3%BCrnberg")
         assertEquals(ParsedLocation.SearchQuery("Nürnberg"), umlautHere)
     }
+
+    // Coordinate validation tests
+    @Test
+    fun `isValidLatLon validates correctly`() {
+        org.junit.Assert.assertTrue(isValidLatLon(0.0, 0.0))
+        org.junit.Assert.assertTrue(isValidLatLon(90.0, 180.0))
+        org.junit.Assert.assertTrue(isValidLatLon(-90.0, -180.0))
+        org.junit.Assert.assertTrue(isValidLatLon(48.8584, 2.2945))
+
+        org.junit.Assert.assertFalse(isValidLatLon(90.0001, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(-90.0001, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, 180.0001))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, -180.0001))
+        org.junit.Assert.assertFalse(isValidLatLon(Double.NaN, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, Double.NaN))
+        org.junit.Assert.assertFalse(isValidLatLon(Double.POSITIVE_INFINITY, 0.0))
+    }
+
+    @Test
+    fun `parsers reject out of bounds coordinates and fallback to web or search`() {
+        val appleOutOfBounds = AppleMapsParser.parse("https://maps.apple.com/?ll=95.0,13.4")
+        assertTrue(appleOutOfBounds is ParsedLocation.WebFallback)
+
+        val osmOutOfBounds = OpenStreetMapParser.parse("https://www.openstreetmap.org/?mlat=95.0&mlon=13.4")
+        assertTrue(osmOutOfBounds is ParsedLocation.WebFallback)
+
+        val yandexOutOfBounds = YandexMapsParser.parse("https://yandex.com/maps/?ll=13.4,95.0")
+        assertTrue(yandexOutOfBounds is ParsedLocation.WebFallback)
+
+        val wazeOutOfBounds = WazeMapsParser.parse("https://waze.com/ul?ll=95.0,13.4")
+        assertTrue(wazeOutOfBounds is ParsedLocation.WebFallback)
+
+        val hereOutOfBounds = HereMapsParser.parse("https://share.here.com/l/95.0,13.4")
+        assertTrue(hereOutOfBounds is ParsedLocation.WebFallback)
+
+        val bingOutOfBounds = BingMapsParser.parse("https://www.bing.com/maps?cp=95.0~13.4")
+        assertTrue(bingOutOfBounds is ParsedLocation.WebFallback)
+    }
+
+    @Test
+    fun `parsers handle malformed URLs with WebFallback instead of crash or home`() {
+        val malformedApple = AppleMapsParser.parse("https://maps.apple.com/?q=%2")
+        assertTrue(malformedApple is ParsedLocation.WebFallback)
+
+        val malformedOsm = OpenStreetMapParser.parse("https://www.openstreetmap.org/?query=%2")
+        assertTrue(malformedOsm is ParsedLocation.WebFallback)
+
+        val malformedYandex = YandexMapsParser.parse("https://yandex.com/maps/?text=%2")
+        assertTrue(malformedYandex is ParsedLocation.WebFallback)
+
+        val malformedWaze = WazeMapsParser.parse("https://waze.com/ul?q=%2")
+        assertTrue(malformedWaze is ParsedLocation.WebFallback)
+
+        val malformedHere = HereMapsParser.parse("https://share.here.com/l/%2")
+        assertTrue(malformedHere is ParsedLocation.WebFallback)
+
+        val malformedBing = BingMapsParser.parse("https://www.bing.com/maps?q=%2")
+        assertTrue(malformedBing is ParsedLocation.WebFallback)
+    }
 }

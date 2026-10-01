@@ -232,10 +232,6 @@ object GeoCoordinateParser : MapUrlParser {
         return Pair(lat, lon)
     }
 
-    private fun isValidLatLon(lat: Double, lon: Double): Boolean {
-        return lat in -90.0..90.0 && lon in -180.0..180.0
-    }
-
     private fun formatGeoUri(lat: Double, lon: Double): String {
         return "geo:%.6f,%.6f".format(Locale.US, lat, lon)
     }

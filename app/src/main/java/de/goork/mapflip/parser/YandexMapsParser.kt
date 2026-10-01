@@ -58,7 +58,7 @@ object YandexMapsParser : MapUrlParser {
                 if (parts.size == 2) {
                     val lon = parts[0].toDoubleOrNull()
                     val lat = parts[1].toDoubleOrNull()
-                    if (lat != null && lon != null) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         val text = params["text"]
                         return ParsedLocation.Coordinates(lat, lon, label = text, mode = travelMode)
                     }
@@ -82,7 +82,7 @@ object YandexMapsParser : MapUrlParser {
 
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

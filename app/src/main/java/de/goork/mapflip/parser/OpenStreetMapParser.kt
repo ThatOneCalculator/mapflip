@@ -61,7 +61,7 @@ object OpenStreetMapParser : MapUrlParser {
             // 1. Direct Marker coordinates (mlat=lat&mlon=lon)
             val mlat = params["mlat"]?.toDoubleOrNull()
             val mlon = params["mlon"]?.toDoubleOrNull()
-            if (mlat != null && mlon != null) {
+            if (mlat != null && mlon != null && isValidLatLon(mlat, mlon)) {
                 val query = params["query"]
                 return ParsedLocation.Coordinates(mlat, mlon, label = query)
             }
@@ -80,7 +80,7 @@ object OpenStreetMapParser : MapUrlParser {
                 if (parts.size >= 3) {
                     val lat = parts[1].toDoubleOrNull()
                     val lon = parts[2].toDoubleOrNull()
-                    if (lat != null && lon != null) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         return ParsedLocation.Coordinates(lat, lon, label = null)
                     }
                 }
@@ -88,7 +88,7 @@ object OpenStreetMapParser : MapUrlParser {
 
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

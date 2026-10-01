@@ -136,7 +136,7 @@ object GoogleMapsParser : MapUrlParser {
             // 7. Short URLs / Web fallback
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 
@@ -153,10 +153,6 @@ object GoogleMapsParser : MapUrlParser {
             }
         }
         return null
-    }
-
-    private fun isValidLatLon(lat: Double, lon: Double): Boolean {
-        return lat in -90.0..90.0 && lon in -180.0..180.0
     }
 
     private fun parseQueryParams(query: String): Map<String, String> {

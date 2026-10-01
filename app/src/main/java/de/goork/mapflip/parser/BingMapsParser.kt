@@ -69,7 +69,7 @@ object BingMapsParser : MapUrlParser {
                 if (parts.size == 2) {
                     val lat = parts[0].toDoubleOrNull()
                     val lon = parts[1].toDoubleOrNull()
-                    if (lat != null && lon != null) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         val searchQuery = params["q"] ?: params["where1"]
                         return ParsedLocation.Coordinates(lat, lon, label = searchQuery, mode = travelMode)
                     }
@@ -84,7 +84,7 @@ object BingMapsParser : MapUrlParser {
 
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

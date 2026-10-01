@@ -62,7 +62,7 @@ object HereMapsParser : MapUrlParser {
             if (pathCoordMatcher.find()) {
                 val lat = pathCoordMatcher.group(1)?.toDoubleOrNull()
                 val lon = pathCoordMatcher.group(2)?.toDoubleOrNull()
-                if (lat != null && lon != null) {
+                if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                     val label = params["msg"] ?: params["q"]
                     return ParsedLocation.Coordinates(lat, lon, label = label, mode = queryTravelMode)
                 }
@@ -75,7 +75,7 @@ object HereMapsParser : MapUrlParser {
                 if (parts.size >= 2) {
                     val lat = parts[0].toDoubleOrNull()
                     val lon = parts[1].toDoubleOrNull()
-                    if (lat != null && lon != null) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         val label = params["msg"] ?: params["q"]
                         return ParsedLocation.Coordinates(lat, lon, label = label, mode = queryTravelMode)
                     }
@@ -121,7 +121,7 @@ object HereMapsParser : MapUrlParser {
 
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

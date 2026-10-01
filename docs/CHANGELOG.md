@@ -1,3 +1,8 @@
+## 1.3.2
+- Verbesserte Lokalisierung: Vollständige Übersetzungen für alle 20 Sprachen und optimierte Erkennung norwegischer Systemsprachen
+- Erhöhte Stabilität: Robuste Validierung von Geokoordinaten und sicheres Fallback bei beschädigten Karten-Links
+- Detailverbesserungen: Zuverlässigeres Öffnen von Web-Fallbacks im Browser
+
 ## 1.3.1
 - Aufgeräumte Benutzeroberfläche: Schnellere Ladezeiten und noch flüssigere Bedienung
 - Verbesserte Zuverlässigkeit: Stabilere automatische Erkennung und Weiterleitung von geteilten Karten-Links

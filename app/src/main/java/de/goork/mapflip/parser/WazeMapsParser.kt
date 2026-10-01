@@ -49,7 +49,7 @@ object WazeMapsParser : MapUrlParser {
                 if (parts.size == 2) {
                     val lat = parts[0].toDoubleOrNull()
                     val lon = parts[1].toDoubleOrNull()
-                    if (lat != null && lon != null) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         val query = params["q"]
                         return ParsedLocation.Coordinates(lat, lon, label = query)
                     }
@@ -64,7 +64,7 @@ object WazeMapsParser : MapUrlParser {
                     if (coords.size == 2) {
                         val lat = coords[0].toDoubleOrNull()
                         val lon = coords[1].toDoubleOrNull()
-                        if (lat != null && lon != null) {
+                        if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                             return ParsedLocation.Coordinates(lat, lon)
                         }
                     }
@@ -89,7 +89,7 @@ object WazeMapsParser : MapUrlParser {
 
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

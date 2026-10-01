@@ -75,7 +75,7 @@ object DuckDuckGoParser : MapUrlParser {
                 if (coordMatcher.matches()) {
                     val lat = coordMatcher.group(1)?.toDoubleOrNull()
                     val lon = coordMatcher.group(2)?.toDoubleOrNull()
-                    if (lat != null && lon != null && lat in -90.0..90.0 && lon in -180.0..180.0) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         return ParsedLocation.Coordinates(latitude = lat, longitude = lon, mode = travelMode)
                     }
                 }
@@ -89,7 +89,7 @@ object DuckDuckGoParser : MapUrlParser {
 
             ParsedLocation.Home
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

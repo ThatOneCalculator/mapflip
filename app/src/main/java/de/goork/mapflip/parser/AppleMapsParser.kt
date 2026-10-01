@@ -37,6 +37,7 @@ object AppleMapsParser : MapUrlParser {
 
         val extracted = extractUrl(url) ?: url
         val normalizedUrl = normalizeUrl(extracted)
+        if (!canParse(extracted) && !canParse(normalizedUrl)) return ParsedLocation.Home
 
         return try {
             val uri = URI(normalizedUrl)
@@ -77,7 +78,7 @@ object AppleMapsParser : MapUrlParser {
                 if (parts.size == 2) {
                     val lat = parts[0].toDoubleOrNull()
                     val lon = parts[1].toDoubleOrNull()
-                    if (lat != null && lon != null) {
+                    if (lat != null && lon != null && isValidLatLon(lat, lon)) {
                         val searchQuery = params["q"] ?: params["address"] ?: params["near"] ?: params["name"]
                         return ParsedLocation.Coordinates(lat, lon, label = searchQuery, mode = travelMode)
                     }
@@ -103,7 +104,7 @@ object AppleMapsParser : MapUrlParser {
                 ParsedLocation.Home
             }
         } catch (_: Exception) {
-            ParsedLocation.Home
+            ParsedLocation.WebFallback(normalizedUrl)
         }
     }
 

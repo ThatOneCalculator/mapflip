@@ -235,6 +235,20 @@ class AppleMapsParserTest {
             org.junit.Assert.assertFalse(strings.testLinkTitle.isBlank())
             org.junit.Assert.assertFalse(strings.privacyPolicyTitle.isBlank())
             org.junit.Assert.assertFalse(strings.impressumTitle.isBlank())
+            org.junit.Assert.assertFalse(strings.sectionTargetApp.isBlank())
+            org.junit.Assert.assertFalse(strings.targetAppAlwaysAsk.isBlank())
+            org.junit.Assert.assertFalse(strings.targetAppFallbackOpened.isBlank())
+            org.junit.Assert.assertFalse(strings.redirectingToApp.isBlank())
+            org.junit.Assert.assertFalse(strings.step2.isBlank())
+            org.junit.Assert.assertFalse(strings.step3.isBlank())
+            org.junit.Assert.assertFalse(strings.testLinkHint.isBlank())
         }
+    }
+
+    @Test
+    fun `resolveLanguage maps Bokmal and Nynorsk to no`() {
+        assertEquals("no", de.goork.mapflip.ui.Strings.resolveLanguage("nb"))
+        assertEquals("no", de.goork.mapflip.ui.Strings.resolveLanguage("nn"))
+        assertEquals("no", de.goork.mapflip.ui.Strings.resolveLanguage("no"))
     }
 }
