@@ -1,3 +1,0 @@
-- Refined Interface: Faster loading and even smoother navigation
-- Enhanced Reliability: More robust automatic detection and redirection of shared map links
-- Detail Improvements: Optimized app version recognition and general bug fixes

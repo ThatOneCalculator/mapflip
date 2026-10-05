@@ -1,3 +1,0 @@
-- Aufgeräumte Benutzeroberfläche: Schnellere Ladezeiten und noch flüssigere Bedienung
-- Verbesserte Zuverlässigkeit: Stabilere automatische Erkennung und Weiterleitung von geteilten Karten-Links
-- Detailverbesserungen: Optimierte Erkennung der App-Version und allgemeine Fehlerbehebungen

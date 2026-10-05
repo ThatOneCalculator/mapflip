@@ -1,3 +1,0 @@
-- Improved Localization: Full translations for all 20 languages and optimized Norwegian system language detection
-- Enhanced Stability: Robust geographic coordinate validation and safe fallback for malformed map links
-- Detail Improvements: More reliable web fallback opening in browser
