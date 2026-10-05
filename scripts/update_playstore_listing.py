@@ -10,7 +10,7 @@ LISTINGS = {
 
 MapFlip is the ultimate Apple Maps converter, fast Apple map redirect, and link converter for Android. Set it up once, and everything works automatically as a seamless Google Maps redirect: Every Apple Map link, Apple Maps URL, or location opens directly in Google Maps. No copying, no pasting, no browser detours.
 
-Whether you need an Apple Maps for Android solution, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles all Apple Maps URLs in the background. Easily convert Apple Maps to Google Maps and open Apple Maps links directly in your favorite navigation app.
+Whether you need an Apple Maps for Android solution, an Apple map for Android tool, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles every Apple Map URL and link in the background. Easily convert Apple Maps to Google Maps, convert Apple map links, redirect to Google Maps, and open Apple Maps links directly in your favorite navigation app.
 
 🔧 How it works:
 1. Open MapFlip
@@ -42,7 +42,7 @@ MapFlip was built for Android users who regularly receive Apple Maps links from 
 
 MapFlip ist der zuverlässige Apple Maps Konverter, smarte Apple Karten Konverter und die automatische Kartenweiterleitung für Android. Einmal einrichten, danach läuft alles automatisch als Google Maps Weiterleitung: Jeder Apple Karten Link, jeder Apple Maps Link und jede URL öffnet sich direkt in Google Maps. Kein Kopieren, kein Einfügen, kein Umweg über den Browser.
 
-Egal ob Apple zu Google Maps, Apple Karten zu Google Maps, Apple Karten weiterleiten, Apple Karten öffnen oder Apple Karten auf Android: MapFlip ist die schnelle Apple Maps Weiterleitung, lässt dich blitzschnell jeden Apple Maps Link konvertieren und leitet alle Karten-Links um.
+Egal ob Apple to Google Maps, Apple Karten zu Google Maps, Apple Karten weiterleiten, Apple Karten teilen, Apple Karten öffnen oder Apple Karten auf Android: MapFlip ist die schnelle Apple Maps Weiterleitung, lässt dich blitzschnell jeden Apple Maps Link weiterleiten und konvertieren und leitet alle Karten-Links um.
 
 🔧 So funktioniert's:
 1. Öffne MapFlip
@@ -53,7 +53,7 @@ Egal ob Apple zu Google Maps, Apple Karten zu Google Maps, Apple Karten weiterle
 ✨ Features & Datenschutz:
 • 🚗 Turn-by-Turn Navigation & Android Auto – Apple Karten Navigation: Startet sofort die native Routenführung in Google Maps
 • 🧭 Wähle deine Navigations-App – Öffne Ziele in Google Maps, Waze, Organic Maps, OsmAnd oder Systemauswahl
-• 🔄 Automatische Apple Karten Weiterleitung – Schneller Apple Karten Konverter, Apple Maps Link konvertieren & Google Maps Weiterleitung
+• 🔄 Automatische Apple Karten Weiterleitung – Schneller Apple Karten Konverter, Apple Maps Link weiterleiten & Google Maps Weiterleitung
 • 🔒 100% Offline & Datenschutz – Keine Internet-Berechtigung (0 Permissions), kein Tracking, keine Werbung
 • ⏸️ Pausen-Modus & Schnelleinstellungs-Kachel – Umleitung jederzeit im Kontrollzentrum pausieren
 • 💬 Universelle App-Kompatibilität – Funktioniert mit WhatsApp, Telegram, Signal, SMS, Slack und E-Mails
@@ -61,9 +61,9 @@ Egal ob Apple zu Google Maps, Apple Karten zu Google Maps, Apple Karten weiterle
 
 🗺️ Unterstützte Link-Formate & Dienste:
 • Apple Maps / Apple Karten URLs & Suchanfragen (maps.apple.com)
+• Apple Karten teilen – GPS-Koordinaten, Adressen & geteilte Standorte
 • OpenStreetMap (osm.org), Bing Maps & Yandex Maps
-• GPS-Koordinaten & geteilte Standorte
-• Adressen, Ortsmarkierungen & Navigationsrouten
+• Ortsmarkierungen & Navigationsrouten
 
 MapFlip wurde für Android-Nutzer entwickelt, die regelmäßig Apple Maps Links oder Apple Karten von iPhone-Nutzern erhalten."""
     },
