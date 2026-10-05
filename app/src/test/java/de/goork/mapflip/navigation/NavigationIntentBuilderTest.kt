@@ -290,4 +290,41 @@ class NavigationIntentBuilderTest {
         assertTrue(s.openInButtonLabel(TargetNavigationApp.SYGIC).contains("Sygic"))
         assertTrue(s.openInButtonLabel(TargetNavigationApp.LOCUS_MAP).contains("Locus Map"))
     }
+
+    @Test
+    fun `here wego preserves label when travel mode is active`() {
+        val coordsWithLabelAndMode = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin Center", mode = TravelMode.WALKING)
+        val uri = NavigationIntentBuilder.buildHereWeGoUriString(coordsWithLabelAndMode)
+        assertEquals("https://wego.here.com/directions/walk//52.520000,13.405000?msg=Berlin+Center", uri)
+    }
+
+    @Test
+    fun `coordinate formatting avoids scientific notation across all navigation apps`() {
+        // Very small coordinate that would turn into 1.0E-4 with standard Double.toString()
+        val smallCoords = ParsedLocation.Coordinates(0.0001, 0.00005)
+
+        val waze = NavigationIntentBuilder.buildWazeUriString(smallCoords)
+        assertEquals("waze://?ll=0.0001,0.00005&navigate=yes", waze)
+
+        val om = NavigationIntentBuilder.buildOrganicMapsUriString(smallCoords)
+        assertEquals("om://map?v=1&ll=0.0001,0.00005", om)
+
+        val osmand = NavigationIntentBuilder.buildOsmAndUriString(smallCoords)
+        assertEquals("osmandmaps://?lat=0.0001&lon=0.00005&z=16", osmand)
+
+        val yandex = NavigationIntentBuilder.buildYandexMapsUriString(smallCoords)
+        assertEquals("yandexmaps://maps.yandex.ru/?ll=0.00005,0.0001&z=16", yandex)
+
+        val magicEarth = NavigationIntentBuilder.buildMagicEarthUriString(smallCoords)
+        assertEquals("magicearth://map?lat=0.0001&lon=0.00005", magicEarth)
+
+        val citymapper = NavigationIntentBuilder.buildCitymapperUriString(smallCoords)
+        assertEquals("citymapper://directions?endcoord=0.0001,0.00005", citymapper)
+
+        val komoot = NavigationIntentBuilder.buildKomootUriString(smallCoords)
+        assertEquals("komoot://tour?coordinate=0.0001,0.00005", komoot)
+
+        val amigo = NavigationIntentBuilder.buildTomTomAmiGOUriString(smallCoords)
+        assertEquals("amigo://navigate?to=0.0001,0.00005", amigo)
+    }
 }

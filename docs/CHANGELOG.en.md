@@ -1,3 +1,8 @@
+## 1.3.3
+- More Reliable Navigation: Improved handover of locations and routes to external navigation apps
+- Preserved Location Details: Place names remain visible even when turn-by-turn directions are selected
+- Stability Improvements: Smoother and more dependable map link handling
+
 ## 1.3.2
 - Improved Localization: Full translations for all 20 languages and optimized Norwegian system language detection
 - Enhanced Stability: Robust geographic coordinate validation and safe fallback for malformed map links

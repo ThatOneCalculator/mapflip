@@ -100,7 +100,7 @@ object NavigationIntentBuilder {
     fun buildWazeUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "waze://"
-            is ParsedLocation.Coordinates -> "waze://?ll=${location.latitude},${location.longitude}&navigate=yes"
+            is ParsedLocation.Coordinates -> "waze://?ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}&navigate=yes"
             is ParsedLocation.SearchQuery -> "waze://?q=${encode(location.query)}&navigate=yes"
             is ParsedLocation.Navigation -> "waze://?q=${encode(location.destination)}&navigate=yes"
             is ParsedLocation.Directions -> "waze://?q=${encode(location.destination)}&navigate=yes"
@@ -119,7 +119,7 @@ object NavigationIntentBuilder {
             is ParsedLocation.Home -> "om://"
             is ParsedLocation.Coordinates -> {
                 val name = if (!location.label.isNullOrBlank()) "&n=${encode(location.label)}" else ""
-                "om://map?v=1&ll=${location.latitude},${location.longitude}$name"
+                "om://map?v=1&ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}$name"
             }
             is ParsedLocation.SearchQuery -> "om://search?query=${encode(location.query)}"
             is ParsedLocation.Navigation -> "om://search?query=${encode(location.destination)}"
@@ -137,7 +137,7 @@ object NavigationIntentBuilder {
     fun buildOsmAndUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "osmandmaps://"
-            is ParsedLocation.Coordinates -> "osmandmaps://?lat=${location.latitude}&lon=${location.longitude}&z=16"
+            is ParsedLocation.Coordinates -> "osmandmaps://?lat=${formatCoordCompact(location.latitude)}&lon=${formatCoordCompact(location.longitude)}&z=16"
             is ParsedLocation.SearchQuery -> "osmandmaps://?q=${encode(location.query)}"
             is ParsedLocation.Navigation -> "osmandmaps://?q=${encode(location.destination)}"
             is ParsedLocation.Directions -> "osmandmaps://?q=${encode(location.destination)}"
@@ -169,6 +169,7 @@ object NavigationIntentBuilder {
             is ParsedLocation.Coordinates -> {
                 val latStr = formatCoord(location.latitude)
                 val lonStr = formatCoord(location.longitude)
+                val labelParam = if (!location.label.isNullOrBlank()) "?msg=${encode(location.label)}" else ""
                 if (location.mode != null) {
                     val modePart = when (location.mode) {
                         TravelMode.WALKING -> "walk"
@@ -176,9 +177,8 @@ object NavigationIntentBuilder {
                         TravelMode.TRANSIT -> "public-transport"
                         TravelMode.DRIVING -> "drive"
                     }
-                    "https://wego.here.com/directions/$modePart//$latStr,$lonStr"
+                    "https://wego.here.com/directions/$modePart//$latStr,$lonStr$labelParam"
                 } else {
-                    val labelParam = if (!location.label.isNullOrBlank()) "?msg=${encode(location.label)}" else ""
                     "https://share.here.com/l/$latStr,$lonStr$labelParam"
                 }
             }
@@ -223,7 +223,7 @@ object NavigationIntentBuilder {
                     TravelMode.DRIVING -> "&rtt=auto"
                     null -> ""
                 }
-                "yandexmaps://maps.yandex.ru/?ll=${location.longitude},${location.latitude}&z=16$labelParam$rttParam"
+                "yandexmaps://maps.yandex.ru/?ll=${formatCoordCompact(location.longitude)},${formatCoordCompact(location.latitude)}&z=16$labelParam$rttParam"
             }
             is ParsedLocation.SearchQuery -> "yandexmaps://maps.yandex.ru/?text=${encode(location.query)}"
             is ParsedLocation.Navigation -> {
@@ -259,7 +259,7 @@ object NavigationIntentBuilder {
             is ParsedLocation.Home -> "magicearth://"
             is ParsedLocation.Coordinates -> {
                 val labelParam = if (!location.label.isNullOrBlank()) "&name=${encode(location.label)}" else ""
-                "magicearth://map?lat=${location.latitude}&lon=${location.longitude}$labelParam"
+                "magicearth://map?lat=${formatCoordCompact(location.latitude)}&lon=${formatCoordCompact(location.longitude)}$labelParam"
             }
             is ParsedLocation.SearchQuery -> "magicearth://q=${encode(location.query)}"
             is ParsedLocation.Navigation -> "magicearth://navigate?destination=${encode(location.destination)}"
@@ -279,7 +279,7 @@ object NavigationIntentBuilder {
             is ParsedLocation.Home -> "citymapper://"
             is ParsedLocation.Coordinates -> {
                 val nameParam = if (!location.label.isNullOrBlank()) "&endname=${encode(location.label)}" else ""
-                "citymapper://directions?endcoord=${location.latitude},${location.longitude}$nameParam"
+                "citymapper://directions?endcoord=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}$nameParam"
             }
             is ParsedLocation.SearchQuery -> "citymapper://directions?endaddress=${encode(location.query)}"
             is ParsedLocation.Navigation -> "citymapper://directions?endaddress=${encode(location.destination)}"
@@ -297,7 +297,7 @@ object NavigationIntentBuilder {
     fun buildKomootUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "komoot://"
-            is ParsedLocation.Coordinates -> "komoot://tour?coordinate=${location.latitude},${location.longitude}"
+            is ParsedLocation.Coordinates -> "komoot://tour?coordinate=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}"
             is ParsedLocation.SearchQuery -> "https://www.komoot.com/search/${encode(location.query)}"
             is ParsedLocation.Navigation -> "komoot://tour?coordinate=${encode(location.destination)}"
             is ParsedLocation.Directions -> "komoot://tour?coordinate=${encode(location.destination)}"
@@ -314,7 +314,7 @@ object NavigationIntentBuilder {
     fun buildTomTomAmiGOUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "amigo://"
-            is ParsedLocation.Coordinates -> "amigo://navigate?to=${location.latitude},${location.longitude}"
+            is ParsedLocation.Coordinates -> "amigo://navigate?to=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}"
             is ParsedLocation.SearchQuery -> "amigo://search?q=${encode(location.query)}"
             is ParsedLocation.Navigation -> "amigo://navigate?to=${encode(location.destination)}"
             is ParsedLocation.Directions -> "amigo://navigate?to=${encode(location.destination)}"
@@ -427,6 +427,10 @@ object NavigationIntentBuilder {
 
     private fun formatCoord(value: Double): String {
         return "%.6f".format(java.util.Locale.US, value)
+    }
+
+    private fun formatCoordCompact(value: Double): String {
+        return java.text.DecimalFormat("0.######", java.text.DecimalFormatSymbols(java.util.Locale.US)).format(value)
     }
 
     private fun encode(value: String): String = URLEncoder.encode(value, "UTF-8")

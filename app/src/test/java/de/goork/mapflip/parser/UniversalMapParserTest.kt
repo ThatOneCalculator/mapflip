@@ -109,4 +109,19 @@ class UniversalMapParserTest {
         assertEquals(48.137154, coords.latitude, 0.000001)
         assertEquals(11.576124, coords.longitude, 0.000001)
     }
+
+    @Test
+    fun `parse returns WebFallback for unknown valid web URLs`() {
+        val unknownUrl = "https://custom-maps-service.example.org/place?id=12345"
+        val parsed = UniversalMapParser.parse(unknownUrl)
+        assertTrue(parsed is ParsedLocation.WebFallback)
+        assertEquals(unknownUrl, (parsed as ParsedLocation.WebFallback).fallbackUrl)
+    }
+
+    @Test
+    fun `parse returns Home for malformed URI syntax`() {
+        val malformed = "http://invalid^url|test"
+        val parsed = UniversalMapParser.parse(malformed)
+        assertTrue(parsed is ParsedLocation.Home)
+    }
 }

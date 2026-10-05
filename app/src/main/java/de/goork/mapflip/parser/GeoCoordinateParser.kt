@@ -22,7 +22,7 @@ object GeoCoordinateParser : MapUrlParser {
     // 2. DMS Pattern (e.g. 52°31'12.5"N, 13°24'18.2"E or 52° 31' 12" N 13° 24' 18" E)
     // Supports °, d, ', m, ′, ", s, ″
     private val DMS_PATTERN = Pattern.compile(
-        """([0-9]{1,3})\s*[°ddeg\s]\s*([0-9]{1,2})\s*['′m\s]\s*([0-9]{1,2}(?:\.[0-9]+)?)\s*["″s]?\s*([NSEWnsew])\s*[,;\s]\s*([0-9]{1,3})\s*[°ddeg\s]\s*([0-9]{1,2})\s*['′m\s]\s*([0-9]{1,2}(?:\.[0-9]+)?)\s*["″s]?\s*([NSEWnsew])"""
+        """([0-9]{1,3})(?:\s*[°d]\s*|\s+)([0-9]{1,2})(?:\s*['′m]\s*|\s+)([0-9]{1,2}(?:\.[0-9]+)?)\s*["″s]?\s*([NSEWnsew])\s*[,;\s]\s*([0-9]{1,3})(?:\s*[°d]\s*|\s+)([0-9]{1,2})(?:\s*['′m]\s*|\s+)([0-9]{1,2}(?:\.[0-9]+)?)\s*["″s]?\s*([NSEWnsew])"""
     )
 
     // 3. Decimal Degrees with directional indicators (e.g. 52.5200° N, 13.4050° E or 52.5200N, 13.4050E)

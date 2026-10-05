@@ -38,8 +38,17 @@ object UniversalMapParser {
                 return parser.parse(extracted)
             }
         }
-        // Fallback default: Try AppleMapsParser or search query
-        return AppleMapsParser.parse(extracted)
+        // Fallback default: If valid web URL, return WebFallback; if malformed or non-web, delegate/home
+        return try {
+            val uri = java.net.URI(extracted)
+            if (uri.scheme?.startsWith("http", ignoreCase = true) == true && uri.host != null) {
+                ParsedLocation.WebFallback(extracted)
+            } else {
+                AppleMapsParser.parse(extracted)
+            }
+        } catch (_: Exception) {
+            ParsedLocation.Home
+        }
     }
 
     fun detectSourceService(url: String?): String {

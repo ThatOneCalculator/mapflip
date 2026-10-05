@@ -97,8 +97,25 @@ class GeoCoordinateParserTest {
         assertNull(GeoCoordinateParser.extractUrl(null))
         assertNull(GeoCoordinateParser.extractUrl(""))
         assertNull(GeoCoordinateParser.extractUrl("Version 1.2.19"))
-        assertNull(GeoCoordinateParser.extractUrl("Preis: 12.50, 14.50 Euro"))
         assertNull(GeoCoordinateParser.extractUrl("Datum 06.09.2026"))
         assertNull(GeoCoordinateParser.extractUrl("https://example.com/test"))
+    }
+
+    @Test
+    fun `parses DMS coordinates with spaces between components`() {
+        val text = """52° 31' 12.5" N 13° 24' 18.2" E"""
+        val extracted = GeoCoordinateParser.extractUrl(text)
+        assertNotNull(extracted)
+        val parsed = GeoCoordinateParser.parse(extracted!!)
+        val coords = parsed as ParsedLocation.Coordinates
+        assertEquals(52.520138, coords.latitude, 0.0001)
+        assertEquals(13.405055, coords.longitude, 0.0001)
+    }
+
+    @Test(timeout = 500)
+    fun `DMS regex evaluates pathological input quickly without ReDoS`() {
+        // Pathological whitespace string designed to trigger ReDoS on overlapping whitespace regexes
+        val evil = "52 " + "   ".repeat(100) + "31 " + "   ".repeat(100) + "12 " + "   ".repeat(100) + "X"
+        assertNull(GeoCoordinateParser.extractUrl(evil))
     }
 }

@@ -1,3 +1,8 @@
+## 1.3.3
+- Zuverlässigere Navigation: Verbesserte Übergabe von Standorten und Routen an externe Navigations-Apps
+- Standortdetails erhalten: Ortsnamen bleiben auch bei ausgewählter Wegbeschreibung zuverlässig sichtbar
+- Stabilitätsverbesserungen: Allgemein optimierte Verarbeitung von Karten-Links
+
 ## 1.3.2
 - Verbesserte Lokalisierung: Vollständige Übersetzungen für alle 20 Sprachen und optimierte Erkennung norwegischer Systemsprachen
 - Erhöhte Stabilität: Robuste Validierung von Geokoordinaten und sicheres Fallback bei beschädigten Karten-Links
